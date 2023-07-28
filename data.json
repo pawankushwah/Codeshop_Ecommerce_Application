@@ -1,0 +1,253 @@
+[{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88978"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "2.jpeg",
+  "price": 123,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88979"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "3.jpeg",
+  "price": 113,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8897a"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "4.jpeg",
+  "price": 156,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8897b"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "5.jpeg",
+  "price": 187,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8897c"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "6.jpeg",
+  "price": 145,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8897d"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "7.jpeg",
+  "price": 198,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8897e"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "8.jpeg",
+  "price": 128,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8897f"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "9.jpeg",
+  "price": 123,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88980"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "10.jpeg",
+  "price": 129,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88981"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "11.jpeg",
+  "price": 120,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88982"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "12.jpeg",
+  "price": 126,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88983"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "13.jpeg",
+  "price": 156,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88984"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "14.jpeg",
+  "price": 120,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88985"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "15.jpeg",
+  "price": 120,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88986"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "16.jpeg",
+  "price": 138,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88987"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "17.jpeg",
+  "price": 123,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88988"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "18.jpeg",
+  "price": 156,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf88989"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "19.jpeg",
+  "price": 125,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8898a"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "20.jpeg",
+  "price": 167,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8898b"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "21.jpeg",
+  "price": 189,
+  "sell_price":20,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64bf55bf1d7f54061cf8898c"
+  },
+  "productName": "Image",
+  "shortDescription": "This is cool image",
+  "description": "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
+  "category": "image",
+  "filename": "22.jpeg",
+  "price": 178,
+  "sell_price":20,
+  "__v": 0
+}]
