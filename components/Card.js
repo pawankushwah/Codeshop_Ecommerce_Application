@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function card({ view, productDetails }) {
   // console.log(productDetails);
-  let productPriceOffPercentage = (1 - Number(productDetails.selling_price) / Number(productDetails.price)) * 100;
-  console.log(productPriceOffPercentage);
+  let productPriceOffPercentage = (1 - Number(productDetails.sell_price) / Number(productDetails.price)) * 100;
+  // console.log(productPriceOffPercentage);
   productPriceOffPercentage = Math.floor(productPriceOffPercentage);
 
   return (
@@ -30,7 +30,7 @@ export default function card({ view, productDetails }) {
             <div className=" mt-2 p-2 text-gray-500 rounded-lg text-sm">
               <span className="text-3xl text-black p-2">
                 <span className="relative -top-1.5 text-sm">&#8377;</span>
-                {productDetails.selling_price}
+                {productDetails.sell_price}
               </span>
               M.R.P:
               <span className="line-through mr-4 p-2">
@@ -63,7 +63,7 @@ export default function card({ view, productDetails }) {
             <div className=" mt-2 p-2 text-gray-500 rounded-lg text-sm">
               <span className="text-3xl text-black p-2">
                 <span className="relative -top-1.5 text-sm">&#8377;</span>
-                {productDetails.selling_price}
+                {productDetails.sell_price}
               </span>
               <span className="line-through mr-4 p-2">
                 &#8377;{productDetails.price}

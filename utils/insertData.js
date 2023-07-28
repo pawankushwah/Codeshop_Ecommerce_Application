@@ -1,5 +1,5 @@
-const { dbConnect, insertData } = require("./dbMethods");
-const { product } = require("./schemas");
+const { default: mongoose } = require("mongoose");
+const { dbConnect, model } = require("./models");
 
 const images = [
     {
@@ -215,8 +215,19 @@ const images = [
 ];
 
 dbConnect().then((response) => {
-    console.log(response);
+    // console.log(response);
+    console.log(mongoose.connection.readyState);
 });
-insertData("product", product, images ).then((response) => {
-    console.log(response);
+model("products").then((data) => {
+  console.log(data);
+  // let productModel = mongoose.models["products"];
+  data.find({category: "image"}).then((data) => {
+    console.log(data);
+  }, (error) => {
+    console.log(error);
+  });
+
+}, (error) => {
+  console.log(error);
 });
+

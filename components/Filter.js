@@ -5,12 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { PropTypes } from "prop-types";
 import Link from "next/link";
 
-export default function Filter({
-  body,
-  path,
-  category,
-  requestType,
-}) {
+export default function Filter({ body, path, category, requestType }) {
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
   const url = `${process.env.NEXT_PUBLIC_FULL_ADDRESS}/${path}`;
@@ -24,14 +19,18 @@ export default function Filter({
   function loadProducts(url, body, requestType) {
     // fetching products details
     setIsLoading(true);
-    setIsProductFound(true)
+    setIsProductFound(true);
     let dataProduct = fetchData(url, body, requestType).then(
       (data) => {
         setProduct([data]);
-        setTimeout(() => {
-          setIsLoading(false)
-          if(data.status == 0) setIsProductFound(false);
-      }, 1000, data);
+        setTimeout(
+          () => {
+            setIsLoading(false);
+            if (data.status == 0) setIsProductFound(false);
+          },
+          1000,
+          data
+        );
       },
       (error) => {
         console.error("Problem in Fetching product", error);
@@ -78,10 +77,6 @@ export default function Filter({
       listViewBtnRef.current.firstElementChild.classList.remove("opacity-0");
   }
 
-function showProducts() {
-  console.log(product)
-}
-
   return (
     <>
       <div className="flex min-h-screen">
@@ -89,7 +84,6 @@ function showProducts() {
           <div className="p-6">
             <h1 className="text-xl font-bold">Category</h1>
             <ul>
-            <button onClick={showProducts}>show</button>
               {categories &&
                 categories.map((category, index) => {
                   return (
@@ -100,7 +94,9 @@ function showProducts() {
                           href={`${process.env.NEXT_PUBLIC_FULL_ADDRESS}/products/${category}`}
                           onClick={() => {
                             loadProducts(
-                              `${process.env.NEXT_PUBLIC_FULL_ADDRESS}/api/product/${category}`, ``, "POST"
+                              `${process.env.NEXT_PUBLIC_FULL_ADDRESS}/api/product/${category}`,
+                              ``,
+                              "POST"
                             );
                           }}
                         >
@@ -181,7 +177,7 @@ function showProducts() {
             </span>
           </div>
           <hr className="text-black bg-black h-1 mb-4" />
-          { isLoading && (
+          {isLoading && (
             <>
               <div className="flex flex-col items-center justify-center">
                 <div className="w-8 h-8 border-4 border-blue-500 border-r-white rounded-full animate-spin"></div>
@@ -190,8 +186,20 @@ function showProducts() {
             </>
           )}
           {!isProductFound && (
-              <div className="text-center text-2xl">Product not found</div>
-            )}
+            <div className="text-center text-2xl">Product not found</div>
+          )}
+          {
+            <div
+              className={`text-center text-2xl ${
+                product &&
+                product.length > 0 &&
+                product[0].status == 1 &&
+                product[0].response.length == 0 ? "block" : "hidden"
+              }`}
+            >
+              Data not found
+            </div>
+          }
           <div
             className={`relative mt-10 min-h-screen ${
               filterView == "card" ? "grid" : "flex"
@@ -201,7 +209,7 @@ function showProducts() {
           >
             {product &&
               product.length > 0 &&
-              product.status == 1 &&
+              product[0].status == 1 &&
               product[0].response.map((productDetails, index) => {
                 return (
                   <Card
