@@ -1,0 +1,34 @@
+.quantityInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+  }
+  
+  .numberInput {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 4px;
+    outline: none;
+  }
+  
+  .decrement,
+  .increment {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(200, 196, 196);
+    outline: none;
+    color: #555;
+    padding: 4px;
+  }
+  
+  .decrement:hover,
+  .increment:hover {
+    color: #000;
+  }
