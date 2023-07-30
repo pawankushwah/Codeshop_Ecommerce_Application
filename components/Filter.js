@@ -8,8 +8,7 @@ import Link from "next/link";
 export default function Filter({ body, path, category, requestType }) {
   const [product, setProduct] = useState([]);
   const [categories, setCategories] = useState([]);
-  const url = `${process.env.NEXT_PUBLIC_FULL_ADDRESS}/${path}`;
-  const categoriesUrl = `${process.env.NEXT_PUBLIC_FULL_ADDRESS}/api/categories`;
+  const categoriesUrl = `/api/categories`;
   const [filterView, setFilterView] = useState("card");
   const cardViewBtnRef = useRef(null);
   const listViewBtnRef = useRef(null);
@@ -26,7 +25,7 @@ export default function Filter({ body, path, category, requestType }) {
         setTimeout(
           () => {
             setIsLoading(false);
-            if (data.status == 0) setIsProductFound(false);
+            if (data && data.status == 0) setIsProductFound(false);
           },
           1000,
           data
@@ -51,7 +50,7 @@ export default function Filter({ body, path, category, requestType }) {
   }
 
   useEffect(() => {
-    loadProducts(url, body, requestType);
+    loadProducts(path, body, requestType);
     loadCategories();
   }, []);
 
@@ -91,10 +90,10 @@ export default function Filter({ body, path, category, requestType }) {
                       <li key={index + "123"} className="">
                         <Link
                           className="pl-2 cursor-pointer hover:text-orange-500"
-                          href={`${process.env.NEXT_PUBLIC_FULL_ADDRESS}/products/${category}`}
+                          href={`/category/${category}`}
                           onClick={() => {
                             loadProducts(
-                              `${process.env.NEXT_PUBLIC_FULL_ADDRESS}/api/product/${category}`,
+                              `/api/category/${category}`,
                               ``,
                               "POST"
                             );
@@ -193,6 +192,7 @@ export default function Filter({ body, path, category, requestType }) {
               className={`text-center text-2xl ${
                 product &&
                 product.length > 0 &&
+                product[0] &&
                 product[0].status == 1 &&
                 product[0].response.length == 0 ? "block" : "hidden"
               }`}
@@ -209,6 +209,7 @@ export default function Filter({ body, path, category, requestType }) {
           >
             {product &&
               product.length > 0 &&
+              product[0] &&
               product[0].status == 1 &&
               product[0].response.map((productDetails, index) => {
                 return (
@@ -250,9 +251,8 @@ export async function fetchData(url, body, requestType) {
 
 Filter.defaultProps = {
   body: "category:image&limit=20",
-  path: "/product/image",
+  path: "/category/image",
   category: "image",
-  hostnameWithSchema: `${process.env.NEXT_PUBLIC_FULL_ADDRESS}`,
   type: "POST",
 };
 

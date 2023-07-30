@@ -14,4 +14,8 @@ const users = new mongoose.Schema({
     name: String
 })
 
-module.exports = {products, users}
+const categories = new mongoose.Schema({
+    category: String
+})
+
+module.exports = {products, users, categories}
