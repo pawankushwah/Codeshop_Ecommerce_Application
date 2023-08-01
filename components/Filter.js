@@ -229,6 +229,7 @@ export default function Filter({ body, path, category, requestType }) {
 
 export async function fetchData(url, body, requestType) {
   requestType = String(requestType).toUpperCase();
+  console.log(JSON.stringify(body));
   try {
     // Fetch Product from the API here and store them in 'Product'
     // For simplicity, let's assume you have the fetched data as 'ProductData'
@@ -237,7 +238,7 @@ export async function fetchData(url, body, requestType) {
         accept: "text/json",
       },
       // referrerPolicy: "strict-origin-when-cross-origin",
-      body: body,
+      body: JSON.stringify(body),
       method: requestType,
       // mode: "cors",
     });

@@ -1,10 +1,14 @@
 // components/SignUp.js
-import React, { useState } from "react";
+import { fetchData } from "@/components/Filter";
+import React, { useRef, useState } from "react";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    email: "",
+    mobile: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
@@ -17,6 +21,8 @@ const SignUp = () => {
   const [hasUppercase, setHasUppercase] = useState(false);
   const [hasLowercase, setHasLowercase] = useState(false);
   const [hasSymbol, setHasSymbol] = useState(false);
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,13 +45,30 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsUsernameAvailable(true);
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       // Form is valid, perform signup logic here
-      console.log("Form data:", formData);
-      
+      let usersData = { ...formData, showEmailField, showMobileField };
+      console.log(usersData);
+      setIsLoading(true);
+      fetch("/api/auth/signup", {
+        body: JSON.stringify(usersData),
+        method: "POST",
+      }).then((response) => {
+        response.json().then((jsonData) => {
+          console.log(jsonData);
+          if (jsonData.redirect) location.href = jsonData.url;
+          if (!jsonData.isUsernameAvailable){
+            setIsUsernameAvailable(jsonData.isUsernameAvailable);
+            setErrors({username:"username is not available"})
+          } 
+          else setErrors(jsonData);
+        });
+      });
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 
@@ -53,7 +76,10 @@ const SignUp = () => {
     setFormData({
       firstName: "",
       lastName: "",
+      email: "",
+      mobile: "",
       emailOrMobile: "",
+      username: "",
       password: "",
       confirmPassword: "",
     });
@@ -69,6 +95,8 @@ const SignUp = () => {
     const passwordRegex = /^(?=.*[@#$&*!])(?=.*[a-z])(?=.*[A-Z]).{6,15}$/;
     const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
     const mobileRegex = /^\d{10}$/;
+
+    if (!data) return (errors.isFormFilled = false);
 
     if (!data.firstName.trim()) {
       errors.firstName = "First name is required";
@@ -97,11 +125,18 @@ const SignUp = () => {
     if (!showEmailField && !showMobileField)
       [(errors.emailOrMobile = "Either Email or Mobile is required")];
 
+    if (!data.username.trim()) {
+      errors.username = "username is required";
+    }
+
+    // if (!isUsernameAvailable) {
+    //   errors.username = "username is not available";
+    // }
+
     if (!data.password) {
       errors.password = "Password is required";
     } else if (!data.password.match(passwordRegex)) {
-      errors.password =
-        "Fullfill all the conditions";
+      errors.password = "Fullfill all the conditions";
     }
 
     if (data.password !== data.confirmPassword) {
@@ -112,8 +147,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-96 mx-auto mt-8 p-4 bg-white rounded shadow-md">
+    <div className="w-96 mx-auto mt-8 p-4 bg-white rounded shadow-md transition-all">
       <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+      {errors.isFormFilled && (
+        <p className="text-red-500 text-sm mt-1">{errors.isFormFilled}</p>
+      )}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="firstName" className="block text-sm font-medium">
@@ -226,6 +264,26 @@ const SignUp = () => {
             )}
           </div>
         )}
+
+        <div className="mb-4">
+          <label htmlFor="username" className="block text-sm font-medium">
+            Username:
+          </label>
+          <input
+            type="tel"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring ${
+              errors.username ? "border-red-500" : "border-gray-300"
+            }`}
+          />
+          {errors.username && (
+            <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+          )}
+        </div>
+
         <div className="mb-4">
           <label htmlFor="password" className="block text-sm font-medium">
             Password:
@@ -321,17 +379,17 @@ const SignUp = () => {
         </div>
         <div className="flex space-x-4 mt-4">
           <button
+            type="submit"
+            className="flex-1 flex justify-center items-center py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+          >
+            <span>Sign Up</span>{isLoading && <span className="block ml-6 w-4 h-4 border-4 border-blue-500 border-r-white rounded-full animate-spin"></span>}
+          </button>
+          <button
             type="reset"
             onClick={handleReset}
             className="flex-1 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-400"
           >
             Reset
-          </button>
-          <button
-            type="submit"
-            className="flex-1 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-          >
-            Sign Up
           </button>
         </div>
       </form>

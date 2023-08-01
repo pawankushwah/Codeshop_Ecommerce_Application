@@ -3,22 +3,59 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  })
+  const [errors, setErrors] = useState({
+    error:"",
+  });
+  const [isLengthValid, setIsLengthValid] = useState(false);
+  const [hasUppercase, setHasUppercase] = useState(false);
+  const [hasLowercase, setHasLowercase] = useState(false);
+  const [hasSymbol, setHasSymbol] = useState(false);
+  const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+
+    if (name === "password") {
+      validatePassword(value);
+    }
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const validatePassword = (password) => {
+    setIsLengthValid(password.length >= 6 && password.length <= 15);
+    setHasUppercase(/[A-Z]/.test(password));
+    setHasLowercase(/[a-z]/.test(password));
+    setHasSymbol(/[@#$&*!]/.test(password));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Replace the following lines with actual login logic and authentication handling
-    console.log("Username:", username);
-    console.log("Password:", password);
+    let isIncorrectPassword = false;
+    !isLengthValid && !hasLowercase && !hasUppercase && !hasSymbol && (
+      setErrors("Incorrect username or password ")
+    ) && (isIncorrectPassword = true)
+
+    fetch("/api/auth/login", {
+      body: JSON.stringify(formData),
+      method: "POST",
+    }).then((response) => {
+      response.json().then((jsonData) => {
+        console.log(jsonData);
+        if (jsonData.login) {
+          localStorage.setItem("userId",jsonData.userId)
+          location.href = jsonData.url;
+        }
+        else setErrors(jsonData.error);
+      });
+    });
     // You can add your authentication logic here, like sending the credentials to a server
     // and handling the login process accordingly
   };
@@ -27,6 +64,10 @@ const Login = () => {
     <div className="h-screen flex items-center justify-center">
       <div className="w-96 mx-auto p-4 bg-white rounded shadow-xl border-2 border-gray-200">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
+        
+        {errors.error && (
+            <p className="text-red-500 text-sm mt-1">{errors.error}</p>
+          )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium">
@@ -35,8 +76,9 @@ const Login = () => {
             <input
               type="text"
               id="username"
-              value={username}
-              onChange={handleUsernameChange}
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             />
           </div>
@@ -47,8 +89,9 @@ const Login = () => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={handlePasswordChange}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
             />
           </div>
