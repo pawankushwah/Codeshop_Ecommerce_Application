@@ -1,8 +1,10 @@
 import { dbConnect, model } from "@/utils/models";
+import { generateJWTToken } from "./login";
 
 export default async function handler(req, res) {
   if (req.method != "POST") res.status(404).end("page not found");
   let data = JSON.parse(req.body);
+
   let newErrors = validateData(data);
 
   await dbConnect();
@@ -10,7 +12,10 @@ export default async function handler(req, res) {
   const isUsernameAvailable = await usersModel.find({
     username: data.username,
   });
-  if (isUsernameAvailable.length > 0) newErrors.isUsernameAvailable = false;
+  if (isUsernameAvailable.length > 0) {
+    res.send({isUsernameAvailable: false});
+    return;
+  }
 
   if (Object.keys(newErrors).length === 0) {
     delete data.confirmPassword;
@@ -19,8 +24,11 @@ export default async function handler(req, res) {
     let response = await usersModel.insertMany(data);
     console.log(response);
 
-    response = res.send({ redirect: true, url: "/auth/login" });
-  } else res.send(newErrors);
+    const jwtToken = generateJWTToken({username:response[0].username});
+
+    response = res.send({ redirect: true, token:jwtToken, userId: response[0]._id, url: "/dashboard/" });
+
+  } else res.send({msg: "something went Wrong"});
 }
 
 function validateData(data) {

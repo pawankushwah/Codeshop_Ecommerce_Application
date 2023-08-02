@@ -54,14 +54,19 @@ const SignUp = () => {
       let usersData = { ...formData, showEmailField, showMobileField };
       console.log(usersData);
       setIsLoading(true);
+      setIsUsernameAvailable(true);
       fetch("/api/auth/signup", {
         body: JSON.stringify(usersData),
         method: "POST",
       }).then((response) => {
         response.json().then((jsonData) => {
           console.log(jsonData);
-          if (jsonData.redirect) location.href = jsonData.url;
-          if (!jsonData.isUsernameAvailable){
+          if (jsonData.token && jsonData.userId) {
+            localStorage.setItem("userId",jsonData.userId)
+            localStorage.setItem("token",jsonData.token)
+            location.href = jsonData.url;
+          }
+          if (jsonData.isUsernameAvailable !== undefined && !jsonData.isUsernameAvailable){
             setIsUsernameAvailable(jsonData.isUsernameAvailable);
             setErrors({username:"username is not available"})
           } 

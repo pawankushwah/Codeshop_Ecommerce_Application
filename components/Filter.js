@@ -44,7 +44,7 @@ export default function Filter({ body, path, category, requestType }) {
         setCategories(data);
       },
       (error) => {
-        console.error("Problem in Fetching Caegories", error);
+        console.error("Problem in Fetching Categories", error);
       }
     );
   }
