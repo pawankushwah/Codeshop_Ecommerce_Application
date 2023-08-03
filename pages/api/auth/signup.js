@@ -1,11 +1,12 @@
 import { dbConnect, model } from "@/utils/models";
-import { generateJWTToken } from "./login";
+import { generateAccessToken, generateRefreshToken } from "@/utils/jwtToken";
 
 export default async function handler(req, res) {
   if (req.method != "POST") res.status(404).end("page not found");
   let data = JSON.parse(req.body);
 
   let newErrors = validateData(data);
+  if (Object.keys(newErrors).length !== 0) return res.send(newErrors);
 
   await dbConnect();
   const usersModel = await model("users");
@@ -24,9 +25,10 @@ export default async function handler(req, res) {
     let response = await usersModel.insertMany(data);
     console.log(response);
 
-    const jwtToken = generateJWTToken({username:response[0].username});
+    const jwtToken = generateAccessToken({username:response[0].username});
+    const jwtRefreshToken = generateRefreshToken({username: response[0].username});
 
-    response = res.send({ redirect: true, token:jwtToken, userId: response[0]._id, url: "/dashboard/" });
+    response = res.send({ redirect: true, token: jwtToken, refreshToken:jwtRefreshToken, userId: response[0]._id, url: "/dashboard/" });
 
   } else res.send({msg: "something went Wrong"});
 }

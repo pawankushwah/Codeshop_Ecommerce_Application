@@ -49,32 +49,33 @@ const SignUp = () => {
     const newErrors = validateForm(formData);
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
-      // Form is valid, perform signup logic here
-      let usersData = { ...formData, showEmailField, showMobileField };
-      console.log(usersData);
-      setIsLoading(true);
-      setIsUsernameAvailable(true);
-      fetch("/api/auth/signup", {
-        body: JSON.stringify(usersData),
-        method: "POST",
-      }).then((response) => {
-        response.json().then((jsonData) => {
-          console.log(jsonData);
-          if (jsonData.token && jsonData.userId) {
-            localStorage.setItem("userId",jsonData.userId)
-            localStorage.setItem("token",jsonData.token)
-            location.href = jsonData.url;
-          }
-          if (jsonData.isUsernameAvailable !== undefined && !jsonData.isUsernameAvailable){
-            setIsUsernameAvailable(jsonData.isUsernameAvailable);
-            setErrors({username:"username is not available"})
-          } 
-          else setErrors(jsonData);
-        });
+    if (Object.keys(newErrors).length !== 0) return;
+    // Form is valid, perform signup logic here
+    let usersData = { ...formData, showEmailField, showMobileField };
+    console.log(usersData);
+    setIsLoading(true);
+    setIsUsernameAvailable(true);
+    fetch("/api/auth/signup", {
+      body: JSON.stringify(usersData),
+      method: "POST",
+    }).then((response) => {
+      response.json().then((jsonData) => {
+        console.log(jsonData);
+        if (jsonData.token && jsonData.userId) {
+          localStorage.setItem("userId", jsonData.userId);
+          localStorage.setItem("token", jsonData.token);
+          location.href = jsonData.url;
+        }
+        if (
+          jsonData.isUsernameAvailable !== undefined &&
+          !jsonData.isUsernameAvailable
+        ) {
+          setIsUsernameAvailable(jsonData.isUsernameAvailable);
+          setErrors({ username: "username is not available" });
+        } else setErrors(jsonData);
       });
-      setTimeout(() => setIsLoading(false), 1000);
-    }
+    });
+    setTimeout(() => setIsLoading(false), 1000);
   };
 
   const handleReset = () => {
@@ -387,7 +388,10 @@ const SignUp = () => {
             type="submit"
             className="flex-1 flex justify-center items-center py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
-            <span>Sign Up</span>{isLoading && <span className="block ml-6 w-4 h-4 border-4 border-blue-500 border-r-white rounded-full animate-spin"></span>}
+            <span>Sign Up</span>
+            {isLoading && (
+              <span className="block ml-6 w-4 h-4 border-4 border-blue-500 border-r-white rounded-full animate-spin"></span>
+            )}
           </button>
           <button
             type="reset"

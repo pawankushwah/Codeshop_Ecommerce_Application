@@ -1,3 +1,5 @@
 1) create a middleware that filters api reques
 2) remove the unwanted shiting of element in the signup/login form so that UI looks good while we are showing errors
 3) impliment token or cookies in the appilication
+4) make the lastname as the optional
+5) delete the insertData file if not required for future data insertion or test

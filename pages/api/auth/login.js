@@ -1,5 +1,5 @@
+import { generateAccessToken, generateRefreshToken } from "@/utils/jwtToken";
 import { dbConnect, model } from "@/utils/models";
-import jwt from "jsonwebtoken";
 
 export default async function handler(req, res) {
   if (req.method != "POST") res.status(404).end("page not found");
@@ -9,8 +9,7 @@ export default async function handler(req, res) {
   console.log(errors);
   if (Object.keys(errors).length !== 0) {
     console.log(errors);
-    res.send(errors);
-    return;
+    return res.send(errors);
   }
 
   await dbConnect();
@@ -23,9 +22,10 @@ export default async function handler(req, res) {
   console.log(response)
   if (response.length === 1) {
     const isPasswordCorrect = checkPassword(response[0].password, data.password);
-    const jwtToken = generateJWTToken({username:response[0].username});
+    const jwtToken = generateAccessToken({username:response[0].username});
+    const jwtRefreshToken = generateRefreshToken({username: response[0].username});
     isPasswordCorrect &&
-      res.send({ login: 1, token: jwtToken, userId: response[0]._id, url: "/dashboard/" });
+      res.send({ login: 1, token: jwtToken, refreshToken:jwtRefreshToken, userId: response[0]._id, url: "/dashboard/" });
     return;
   } else {
     res.send({login: 0, error: "Invalid username or password"});
@@ -51,8 +51,4 @@ function validateData(data) {
 function checkPassword(storedPassword, userPassword) {
   if (storedPassword === userPassword) return true;
   return false;
-}
-
-export function generateJWTToken(userData){
-  return jwt.sign(userData, process.env.JWT_ACCESS_TOKEN_SECRET)
 }

@@ -11,9 +11,9 @@ export default async function verifyJWT(req, res) {
 
     jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET, (error, data) => {
         if(error) res.status(403);
-        res.send(data)
+        return res.send(data)
     })
-    res.send({"msg": "something went wrong"})
+    // res.send({"msg": "something went wrong"})
 }
 
 export async function verify(headers){
