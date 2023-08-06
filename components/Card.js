@@ -15,14 +15,15 @@ export default function card({ view, productDetails }) {
       <Link href={`/product/${productDetails._id}`}>
         {view == "list" && (
           <div className="bg-gray-300 rounded-xl flex w-full h-42">
-            <div className="hover:scale-[250%] transition-all duration-500">
-              <Image
-                src={`/aiimages/${productDetails.filename}`}
-                alt={`image`}
-                width={100}
-                height={50}
-                className="w-full rounded-lg"
-              />
+            <div className="hover:scale-[250%] transition-all duration-500 overflow-hidden">
+                <Image
+                  src={`${productDetails.thumbnail}`}
+                  // src={`/aiimages/1.jpeg`}
+                  alt={`${productDetails.productName}`}
+                  width={100}
+                  height={100}
+                  className="w-full rounded-lg"
+                />
             </div>
             <div className="p-2 w-full">
               <div className=" bg-white rounded-lg">
@@ -50,14 +51,14 @@ export default function card({ view, productDetails }) {
 
         {view == "card" && (
           <div className="bg-gray-300 rounded-xl">
-            <div className="hover:scale-105 transition-all duration-500">
-              <Image
-                src={`/aiimages/${productDetails.filename}`}
-                alt={`image`}
-                width={200}
-                height={100}
-                className="w-full rounded-lg"
-              />
+            <div className="hover:scale-105 transition-all duration-500 overflow-hidden">
+                <Image
+                  src={`${productDetails.thumbnail}`}
+                  alt={`${productDetails.productName}`}
+                  width={200}
+                  height={100}
+                  className="w-full rounded-lg"
+                />
             </div>
             <div className="p-2">
               <div className="text-center bg-white rounded-lg">

@@ -1,13 +1,11 @@
 import jwt from "jsonwebtoken";
 
 export default async function verifyJWT(req, res) {
-    if(req.method !== "POST") {
-        res.status(404).end("Invalid Request");
-        return;
-    }
+    if(req.method !== "POST") return res.status(404).send();
+
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-    if(token === null) return res.sendStatus(401);
+    if(token === null) return res.status(401).send();
 
     jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET, (error, data) => {
         if(error) res.status(403);

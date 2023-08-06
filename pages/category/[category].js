@@ -2,16 +2,33 @@ import Header from "@/components/Header";
 import Filter, { fetchData } from "@/components/Filter";
 import Footer from "@/components/Footer";
 import { dbConnect, model } from "@/utils/models";
+import { useEffect, useState } from "react";
 
+export default function Index({ category }) {
+  const [categories, setCategories] = useState([]);
 
-export default function Index({category}) {
+  function loadCategories() {
+    // fetching categories
+    fetchData('/api/categories', "", "POST").then(
+      (data) => {
+        setCategories(data);
+      },
+      (error) => {
+        console.error("Problem in Fetching Categories", error);
+      }
+    );
+  }
+
+  useEffect(() => {
+    loadCategories();
+  }, [])
 
   return (
     <>
       <a id="top" />
       <Header />
-      <Filter body="" path="/api/category/image" category={category} requestType="POST" />
-      <Footer/>
+      <Filter categories={categories} currentCategory={category} />
+      <Footer />
     </>
   );
 }
@@ -30,15 +47,15 @@ export async function getStaticPaths() {
   let categoryModel = await model("categories");
   let paths = await categoryModel.find({});
   paths = paths.map((path) => {
-    return ({
+    return {
       params: {
-        category: path.category
-      }
-    });
-  })
+        category: path.category,
+      },
+    };
+  });
 
   return {
-    paths : paths,
+    paths: paths,
     fallback: false,
-  }
+  };
 }

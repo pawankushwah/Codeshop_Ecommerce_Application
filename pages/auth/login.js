@@ -52,6 +52,7 @@ const Login = () => {
         if (jsonData.login && jsonData.userId) {
           localStorage.setItem("userId",jsonData.userId)
           localStorage.setItem("token",jsonData.token)
+          jsonData.refreshToken && localStorage.setItem("refreshToken", jsonData.refreshToken);
           location.href = jsonData.url;
         }
         else setErrors(jsonData.error);

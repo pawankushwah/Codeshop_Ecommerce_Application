@@ -56,13 +56,30 @@ export default function ProductPage({ productId }) {
       )}
       <div className="text-center">
         <div className="flex h-screen max-w-7xl m-auto">
-          <div className="flex w-1/3 ">
+          <div className="flex w-2/3 ">
             <div className="w-[20%] border-r-gray-400 flex flex-col items-center">
               <div className="w-3/4 aspect-square overflow-hidden flex justify-center items-center rounded-lg border-2 border-black">
-                <Image
-                  src={`/aiimages/${productDetails.filename}`}
-                  width={100}
-                  height={100}
+                {productDetails.category == "image" && <Image
+                  src={`${productDetails.thumbnail}`}
+                  width={50}
+                  height={50}
+                  alt="product_picture"
+                  className="w-full"
+                  onClick={() =>
+                    showProductImageInPreviewPanel(
+                      `${productDetails.filename}`
+                    )
+                  }
+                />}
+                {productDetails.category == "video" && <iframe className="w-full h-full" src={productDetails.filename} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>}
+              </div>
+            </div>
+            <div className="w-[80%]">
+              <div className="min-h-40 h-full overflow-hidden flex justify-center rounded-lg">
+              {productDetails.category == "image" && <Image
+                  src={previewPanelSrc}
+                  width={500}
+                  height={500}
                   alt="product_picture"
                   className="w-full"
                   onClick={() =>
@@ -70,18 +87,8 @@ export default function ProductPage({ productId }) {
                       `/aiimages/${productDetails.filename}`
                     )
                   }
-                />
-              </div>
-            </div>
-            <div className="w-[80%]">
-              <div className="aspect-square overflow-hidden flex justify-center items-center rounded-lg">
-                <Image
-                  src={previewPanelSrc}
-                  width={300}
-                  height={300}
-                  alt="preview Image"
-                  className="w-full"
-                />
+                />}
+                {productDetails.category == "video" && <iframe className="w-full h-96" src={productDetails.filename} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>}
               </div>
             </div>
           </div>

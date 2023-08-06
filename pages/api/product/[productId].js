@@ -6,5 +6,4 @@ export default async function handler(req, res) {
     let productModel = await model("products");
     let response = await productModel.find({_id: productId});
     res.send(response);
-    res.end()
   }

@@ -1,13 +1,18 @@
-const categories = [
-    "image",
-    "video"
-]
+import { dbConnect, model } from "@/utils/models";
 
-export default function handler(req, res) {
-    if(req.method == "POST"){
-        res.status(200).json(categories);
-    }
-    if(req.method == "GET"){
-        res.status(200).json({ error: "Data Not Found" });
-    }
+export default async function handler(req, res) {
+  try {
+    await dbConnect();
+    const categoriesModel = await model("categories");
+    const response = await categoriesModel.find({});
+    let categoriesArray = [];
+    response.forEach((row) => {
+      console.log(row);
+      categoriesArray.push(row.category);
+    });
+
+    res.send(categoriesArray);
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -1,233 +1,79 @@
 const { default: mongoose } = require("mongoose");
-const { dbConnect, model } = require("./models");
+const { model } = require("./models");
 
-const images = [
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "2.jpeg",
-      price: 123,
-      sell_price: 12,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "3.jpeg",
-      price: 113,
-      sell_price: 10,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "4.jpeg",
-      price: 156,
-      sell_price: 9,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "5.jpeg",
-      price: 187,
-      sell_price: 25,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "6.jpeg",
-      price: 145,
-      sell_price: 45,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "7.jpeg",
-      price: 198,
-      sell_price: 8,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "8.jpeg",
-      price: 128,
-      sell_price: 22,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "9.jpeg",
-      price: 123,
-      sell_price: 7,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "10.jpeg",
-      price: 129,
-      sell_price: 13,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "11.jpeg",
-      price: 120,
-      sell_price: 10,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "12.jpeg",
-      price: 126,
-      sell_price: 15,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "13.jpeg",
-      price: 156,
-      sell_price: 12,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "14.jpeg",
-      price: 120,
-      sell_price: 17,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "15.jpeg",
-      price: 120,
-      sell_price: 4,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "16.jpeg",
-      price: 138,
-      sell_price: 78,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "17.jpeg",
-      price: 123,
-      sell_price: 99,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "18.jpeg",
-      price: 156,
-      sell_price: 23,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "19.jpeg",
-      price: 125,
-      sell_price: 62,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "20.jpeg",
-      price: 167,
-      sell_price: 56,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "21.jpeg",
-      price: 189,
-      sell_price: 44,
-    },
-    {
-      productName: "Image",
-      shortDescription: "This is cool image",
-      description:
-        "This is cool but if you think about it much more then you will find that it is just a way to create a description although I can use lorem snippet",
-      category: "image",
-      filename: "22.jpeg",
-      price: 178,
-      sell_price: 88,
-    },
+const products = [
+  {
+    productName: "Premium Video Course",
+    shortDescription: "Learn advanced techniques from industry experts.",
+    description: "This premium video course provides in-depth knowledge and hands-on experience in various advanced techniques used by professionals in the industry.",
+    category: "video",
+    filename: "1.mp4",
+    price: 99,
+    sell_price: 79,
+  },
+  {
+    productName: "Fitness Workout Videos",
+    shortDescription: "Stay fit and healthy with our comprehensive workout video collection.",
+    description: "Our fitness workout videos cover a wide range of exercises and routines, helping you achieve your health and fitness goals from the comfort of your home.",
+    category: "video",
+    filename: "2.mp4",
+    price: 49,
+    sell_price: 39,
+  },
+  {
+    productName: "Cooking Masterclass",
+    shortDescription: "Unleash your culinary skills with our cooking masterclass video series.",
+    description: "Join our experienced chefs as they guide you through the art of cooking in this comprehensive masterclass video series. Learn to create delicious dishes that will impress your friends and family.",
+    category: "video",
+    filename: "3.mp4",
+    price: 79,
+    sell_price: 69,
+  },
+  {
+    productName: "Travel Adventures",
+    shortDescription: "Embark on a virtual journey to breathtaking destinations around the world.",
+    description: "Immerse yourself in the beauty and culture of various travel destinations through our captivating video collection. Experience the wonders of the world from the comfort of your couch.",
+    category: "video",
+    filename: "4.mp4",
+    price: 29,
+    sell_price: 24,
+  },
+  {
+    productName: "Yoga and Meditation",
+    shortDescription: "Find inner peace and balance with our yoga and meditation video series.",
+    description: "Rejuvenate your mind, body, and soul with our soothing yoga and meditation videos. Follow along with expert instructors to achieve tranquility and mindfulness in your daily life.",
+    category: "video",
+    filename: "5.mp4",
+    price: 59,
+    sell_price: 49,
+  },
+  {
+    productName: "Language Learning",
+    shortDescription: "Master a new language through immersive video lessons.",
+    description: "Embark on a linguistic journey with our language learning video series. Immerse yourself in the language and culture as you progress from beginner to fluent speaker.",
+    category: "video",
+    filename: "6.mp4",
+    price: 69,
+    sell_price: 59,
+  },
+  {
+    productName: "Home DIY Tutorials",
+    shortDescription: "Transform your living space with our step-by-step home DIY tutorials.",
+    description: "Become a DIY expert with our comprehensive home improvement video tutorials. Learn to tackle various projects and upgrades to create the home of your dreams.",
+    category: "video",
+    filename: "7.mp4",
+    price: 39,
+    sell_price: 32,
+  },
 ];
 
-dbConnect().then((response) => {
-    // console.log(response);
-    console.log(mongoose.connection.readyState);
-});
-model("products").then((data) => {
-  console.log(data);
-  // let productModel = mongoose.models["products"];
-  data.find({category: "image"}).then((data) => {
-    console.log(data);
-  }, (error) => {
-    console.log(error);
-  });
+const MONGO_DB_SERVER_WITH_DATABASE = "mongodb://127.0.0.1:27017/Codeshop_Ecommerce_Application"
 
-}, (error) => {
-  console.log(error);
-});
+async function insertData() {
+    await mongoose.connect(MONGO_DB_SERVER_WITH_DATABASE);
+    const productModel = await model('products');
+    // const response = await productModel.insertMany(products);
+    console.log(response);
+}
 
+insertData();

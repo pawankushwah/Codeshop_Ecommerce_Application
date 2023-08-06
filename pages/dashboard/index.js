@@ -1,21 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function Index() {
-  const [authorizationData, setAuthorizationData] = useState({});
   const [usersData, setUsersData] = useState({});
-  async function authorizeTheUser() {
-    const jwtToken = localStorage.token;
-    console.log(jwtToken);
-    let response = await fetch("/api/auth/verifyJWT", {
-      headers: {
-        Authorization: `bearer ${jwtToken}`,
-      },
-      method: "POST",
-    });
-
-    let data = await response.json();
-    setAuthorizationData(data);
-  }
 
   async function getUserData() {
     const jwtToken = localStorage.token;
@@ -31,7 +17,6 @@ export default function Index() {
     setUsersData(data);
   }
   useEffect(() => {
-    authorizeTheUser();
     getUserData();
   }, []);
   return (

@@ -5,21 +5,20 @@ import { useState, useEffect, useRef } from "react";
 import { PropTypes } from "prop-types";
 import Link from "next/link";
 
-export default function Filter({ body, path, category, requestType }) {
+export default function Filter({ currentCategory, categories }) {
   const [product, setProduct] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const categoriesUrl = `/api/categories`;
   const [filterView, setFilterView] = useState("card");
   const cardViewBtnRef = useRef(null);
   const listViewBtnRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isProductFound, setIsProductFound] = useState(true);
 
-  function loadProducts(url, body, requestType) {
+  function loadProducts(url) {
     // fetching products details
     setIsLoading(true);
     setIsProductFound(true);
-    let dataProduct = fetchData(url, body, requestType).then(
+
+    let dataProduct = fetchData(url, "", "POST").then(
       (data) => {
         setProduct([data]);
         setTimeout(
@@ -37,21 +36,8 @@ export default function Filter({ body, path, category, requestType }) {
     );
   }
 
-  function loadCategories() {
-    // fetching categories
-    let dataCategories = fetchData(categoriesUrl, "", "POST").then(
-      (data) => {
-        setCategories(data);
-      },
-      (error) => {
-        console.error("Problem in Fetching Categories", error);
-      }
-    );
-  }
-
   useEffect(() => {
-    loadProducts(path, body, requestType);
-    loadCategories();
+    loadProducts(`/api/category/${currentCategory}`);
   }, []);
 
   // Filter the Product based on whether they are already downloaded or not
@@ -92,11 +78,7 @@ export default function Filter({ body, path, category, requestType }) {
                           className="pl-2 cursor-pointer hover:text-orange-500"
                           href={`/category/${category}`}
                           onClick={() => {
-                            loadProducts(
-                              `/api/category/${category}`,
-                              ``,
-                              "POST"
-                            );
+                            loadProducts(`/api/category/${category}`);
                           }}
                         >
                           {category}
@@ -110,7 +92,7 @@ export default function Filter({ body, path, category, requestType }) {
         </div>
         <div className="w-9/12">
           <div className="flex justify-between p-5">
-            <span className="text-4xl font-bold">{category.toUpperCase()}</span>
+            <span className="text-4xl font-bold">{currentCategory.toUpperCase()}</span>
 
             {/* Filter Dropdown */}
             <span>
@@ -194,7 +176,9 @@ export default function Filter({ body, path, category, requestType }) {
                 product.length > 0 &&
                 product[0] &&
                 product[0].status == 1 &&
-                product[0].response.length == 0 ? "block" : "hidden"
+                product[0].response.length == 0
+                  ? "block"
+                  : "hidden"
               }`}
             >
               Data not found

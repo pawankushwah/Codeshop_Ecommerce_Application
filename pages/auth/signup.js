@@ -64,6 +64,7 @@ const SignUp = () => {
         if (jsonData.token && jsonData.userId) {
           localStorage.setItem("userId", jsonData.userId);
           localStorage.setItem("token", jsonData.token);
+          jsonData.refreshToken && localStorage.setItem("refreshToken", jsonData.refreshToken);
           location.href = jsonData.url;
         }
         if (

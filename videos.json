@@ -1,0 +1,98 @@
+[{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5f6"
+  },
+  "productName": "Premium Video Course",
+  "shortDescription": "Learn advanced techniques from industry experts.",
+  "description": "This premium video course provides in-depth knowledge and hands-on experience in various advanced techniques used by professionals in the industry.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/h6eeDgBjZq8?list=PLW-zSkCnZ-gABGZU8--ISUauyewG40Yex",
+  "price": 99,
+  "sell_price": 79,
+  "__v": 0,
+  "thumbnail": "premium video course.avif"
+},
+{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5f7"
+  },
+  "productName": "Fitness Workout Videos",
+  "shortDescription": "Stay fit and healthy with our comprehensive workout video collection.",
+  "description": "Our fitness workout videos cover a wide range of exercises and routines, helping you achieve your health and fitness goals from the comfort of your home.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/AzV3EA-1-yM",
+  "price": 49,
+  "sell_price": 39,
+  "__v": 0,
+  "thumbnail": "fitness workout.webp"
+},
+{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5f8"
+  },
+  "productName": "Cooking Masterclass",
+  "shortDescription": "Unleash your culinary skills with our cooking masterclass video series.",
+  "description": "Join our experienced chefs as they guide you through the art of cooking in this comprehensive masterclass video series. Learn to create delicious dishes that will impress your friends and family.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/iCzTTyYWUIc",
+  "price": 79,
+  "sell_price": 69,
+  "__v": 0,
+  "thumbnail": "cooking masterclass.webp"
+},
+{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5f9"
+  },
+  "productName": "Travel Adventures",
+  "shortDescription": "Embark on a virtual journey to breathtaking destinations around the world.",
+  "description": "Immerse yourself in the beauty and culture of various travel destinations through our captivating video collection. Experience the wonders of the world from the comfort of your couch.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/9UjK5jC8T5U",
+  "price": 29,
+  "sell_price": 24,
+  "__v": 0,
+  "thumbnail": "travel adventures.webp"
+},
+{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5fa"
+  },
+  "productName": "Yoga and Meditation",
+  "shortDescription": "Find inner peace and balance with our yoga and meditation video series.",
+  "description": "Rejuvenate your mind, body, and soul with our soothing yoga and meditation videos. Follow along with expert instructors to achieve tranquility and mindfulness in your daily life.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/s2NQhpFGIOg",
+  "price": 59,
+  "sell_price": 49,
+  "__v": 0,
+  "thumbnail": "yoga and meditation.webp"
+},
+{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5fb"
+  },
+  "productName": "Language Learning",
+  "shortDescription": "Master a new language through immersive video lessons.",
+  "description": "Embark on a linguistic journey with our language learning video series. Immerse yourself in the language and culture as you progress from beginner to fluent speaker.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/Vk7GW5X7HS4",
+  "price": 69,
+  "sell_price": 59,
+  "__v": 0,
+  "thumbnail": "learning language.webp"
+},
+{
+  "_id": {
+    "$oid": "64ccbd58c9d4003cd79ab5fc"
+  },
+  "productName": "Home DIY Tutorials",
+  "shortDescription": "Transform your living space with our step-by-step home DIY tutorials.",
+  "description": "Become a DIY expert with our comprehensive home improvement video tutorials. Learn to tackle various projects and upgrades to create the home of your dreams.",
+  "category": "video",
+  "filename": "https://www.youtube.com/embed/2G5f_LpdLh0",
+  "price": 39,
+  "sell_price": 32,
+  "__v": 0,
+  "thumbnail": "home diy tutorials.webp"
+}]
