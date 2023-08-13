@@ -5,3 +5,9 @@
 5) delete the insertData file if not required for future data insertion or test
 6) add video urls on the shop from the database
 8) create a different collection for different categories
+9) Create logout functionality
+10) show the error when login username or password is incorrect
+11) optimize the background images of home page
+12) change the type of accessToken in sessionToken schema
+13) convert the project to the typescript
+14) use axios for fetching data
